@@ -3,7 +3,7 @@ N2O Style Plugin
 
 Assets
 
-* Twitter Botstrap v3.0.2 Bundle
+* Twitter Bootstrap v3.0.2 Bundle
 * Font Awesome v4.0.3
 
 Controls
