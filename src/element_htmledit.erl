@@ -1,4 +1,4 @@
--module (htmlbox).
+-module (element_htmledit).
 -author('doxtop@synrc.com').
 -compile(export_all).
 -include_lib("n2o/include/wf.hrl").

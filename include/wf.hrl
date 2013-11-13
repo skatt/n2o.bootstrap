@@ -1,8 +1,8 @@
 -ifndef(N2O_BOOTSTRAP_HRL).
 -define(N2O_BOOTSTRAP_HRL, true).
 
--record(htmlbox, {?ELEMENT_BASE(htmlbox),
-                root = code:priv_dir(n2o)
+-record(htmledit, {?ELEMENT_BASE(element_htmledit),
+                root = code:priv_dir(n2o),
                 dir = "",
                 delegate_api,
                 post_write,
