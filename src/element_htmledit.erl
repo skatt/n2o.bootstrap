@@ -22,7 +22,7 @@ render_element(R= #htmlbox{}) ->
     UploadPostback = wf_event:new(Up, Id, htmlbox, control_event, <<"''">>),
     PostbackFun = wf:temp_id(),
     wf:wire(wf:f("window['~s'] = function(){~s};", [PostbackFun, UploadPostback])),
-    wf:wire("$('[data-edit=\"htmlbox\"]').each(function(){var $htmlbox = $(this);$htmlbox.editor($htmlbox.data());});"),
+    wf:wire("$('[data-edit=\"htmlbox\"]').each(function(){var $this = $(this);$this.htmlbox($this.data());});"),
 
     wf_tags:emit_tag(<<"div">>, wf:render(Html),[
         {<<"id">>, Id},
