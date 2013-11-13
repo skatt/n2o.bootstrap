@@ -34,7 +34,7 @@
         toolbar.insertBefore(this.$element)
     }
 
-    Htmlbox.DEFAULTS = {class: "htmlbox", toolbarclass: "htmlbox-toolbar nav nav-tabs",
+    Htmlbox.DEFAULTS = {class: "htmlbox", toolbarclass: "htmlbox-toolbar nav nav-pills",
         toolbar: [
         {title:'image',     cmd: {name:'insertHtml', tag:'upload'},   icon: 'fa-picture-o' },
         {title:'bold',      cmd: {name:'Bold'}, icon:'fa fa-bold'},
