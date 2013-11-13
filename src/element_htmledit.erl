@@ -22,7 +22,6 @@ render_element(R= #htmlbox{}) ->
     UploadPostback = wf_event:new(Up, Id, htmlbox, control_event, <<"''">>),
     PostbackFun = wf:temp_id(),
     wf:wire(wf:f("window['~s'] = function(){~s};", [PostbackFun, UploadPostback])),
-    wf:wire("$('[data-edit=\"htmlbox\"]').each(function(){var $this = $(this);$this.htmlbox($this.data());});"),
 
     wf_tags:emit_tag(<<"div">>, wf:render(Html),[
         {<<"id">>, Id},
@@ -37,7 +36,7 @@ control_event(Cid, {query_file, Root, Dir, File, MimeType, PostWrite, Target})->
   Name = binary_to_list(File),
   Size = case file:read_file_info(filename:join([Root,Dir,Name])) of 
     {ok, FileInfo} ->
-      wf:wire(wf:f("$('#~s').parent('.file_upload').after(\"<img src='~s' style='resizable:both'>\").remove();", [Cid, filename:join([Dir, Name])])),
+      wf:wire(wf:f("$('#~s').parent('.file_upload').after(\"<img src='~s' style='width:auto'>\").remove();", [Cid, filename:join([Dir, Name])])),
 
       ThDir = filename:join([Root, Dir, "thumbnail"]),
       post_write(PostWrite, Target, Root, Dir, Name, MimeType, filename:join([ThDir--Root, Name])),
@@ -48,7 +47,7 @@ control_event(Cid, {query_file, Root, Dir, File, MimeType, PostWrite, Target})->
 control_event(Cid, {Root, Dir, File, MimeType, Data, ActionHolder, PostWrite, ImgTool, Target, Size}) ->
     Full = filename:join([Root, Dir, File]),
     file:write_file(Full, Data, [write, raw]),
-    wf:wire(wf:f("$('#~s').parent('.file_upload').after(\"<img src='~s'>\").remove();", [Cid, filename:join([Dir, File])])),
+    wf:wire(wf:f("$('#~s').parent('.file_upload').after(\"<img src='~s' style='width:auto;'>\").remove();", [Cid, filename:join([Dir, File])])),
 
     case PostWrite of undefined-> undefined;
     Api ->
