@@ -676,8 +676,8 @@ $.Autocompleter.Select = function (options, input, select, config) {
     show: function() {
       list
         .css({
-          left: $(input).offset().left,
-          top: b.offset().top + b.height()
+          left: $(input).position().left,
+          top: b.height()
         })
         .show();
 

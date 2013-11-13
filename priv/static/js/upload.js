@@ -29,10 +29,10 @@
     var file_index = 0;
     var start_file_index;
 
-    var browse_btn = $('<a>', {href: '#',title: 'Browse', }).on('click', function(e){$input.trigger('click');e.preventDefault();}).append($('<i>', {class: 'icon-upload icon-2x'}));
-    var upload_btn = $('<a>', {href: '#',title: 'Upload'  }).on('click', function(e){begin_upload(); e.preventDefault();}).hide().append($('<i>', {class: 'icon-play-circle icon-2x'}));
-    var reupload_btn=$('<a>', {href: '#',title: 'Reupload'}).on('click', function(e){file_index = 0;begin_upload();e.preventDefault();}).append($('<i>', {class:'icon-refresh icon-light icon-2x'}));
-    var resume_btn = $('<a>', {href: '#',title: 'Resume'  }).on('click', function(e){begin_upload();e.preventDefault();}).append($('<i>', {class:'icon-play-circle icon-2x'}));
+    var browse_btn = $('<a>', {href: '#',title: 'Browse', }).on('click', function(e){$input.trigger('click');e.preventDefault();}).append($('<i>', {class: 'fa fa-upload fa-2x'}));
+    var upload_btn = $('<a>', {href: '#',title: 'Upload'  }).on('click', function(e){begin_upload(); e.preventDefault();}).hide().append($('<i>', {class: 'fa fa-play-circle fa-2x'}));
+    var reupload_btn=$('<a>', {href: '#',title: 'Reupload'}).on('click', function(e){file_index = 0;begin_upload();e.preventDefault();}).append($('<i>', {class:'fa fa-refresh fa-2x'}));
+    var resume_btn = $('<a>', {href: '#',title: 'Resume'  }).on('click', function(e){begin_upload();e.preventDefault();}).append($('<i>', {class:'fa fa-play-circle fa-2x'}));
     var cancel_btn = $('<a>', {href: '#', class: 'text-error', title: 'Cancel'})
       .on('click', function(e) {
         reset_upload();
@@ -40,7 +40,7 @@
         cancelled_upload=true;
         preview.html('');
         e.preventDefault();
-    }).append($('<i>', {class: 'icon-remove icon-2x'}));
+    }).append($('<i>', {class: 'fa fa-remove fa-2x'}));
     var pause_btn = $('<a>', {href:'#', class: '', title: 'Pause'})
       .on('click', function (e) {
         paused_upload=true;
@@ -48,22 +48,22 @@
         resume_btn.show();
         progress_label.html('');
         e.preventDefault();
-      }).append($('<i>', {class: 'icon-pause icon-large'}));
+      }).append($('<i>', {class: 'fa fa-pause fa-lg'}));
 
     var etainfo = $('<span/>', {class: 'info'});
     var info = $('<span/>', {class: 'info', name: 'info'});
-    var progress_bar = $('<div/>', {class:'bar', style: 'width:0;'}).on('progress-changed', function(e, progress){
+    var progress_bar = $('<div/>', {class:'progress-bar', style: 'width:0;'}).on('progress-changed', function(e, progress){
       progress_bar.css('width', progress + "%");
       if(progress === 48){
-        $('i', pause_btn).addClass('icon-light');
-        $('i', resume_btn).addClass('icon-light');
+        $('i', pause_btn).addClass('fa-light');
+        $('i', resume_btn).addClass('fa-light');
       }
       progress_bar.css('width', progress + "%");
 
     });
     var progress_label = $('<div/>', {class: 'progress-label'});
     var progress_ctl = $('<div/>', {class: 'progress-ctl'}).append(upload_btn, pause_btn, resume_btn, reupload_btn);
-    var progress = $('<div/>', {class: 'progress progress-info ' + options.progressClass}).append(progress_bar, progress_label, progress_ctl);
+    var progress = $('<div/>', {class: 'progress progress-bar-info ' + options.progressClass}).append(progress_bar, progress_label, progress_ctl);
     var ctl  = $('<div/>', {class: 'ctl'}).append(cancel_btn, info, etainfo, browse_btn);
     var preview = $('<div/>', {class: 'preview'});
     $input.wrap("<div class='file_upload' contenteditable='false'></div>").hide().parent().append(preview, progress, ctl);
@@ -138,8 +138,8 @@
       info.html('');
       progress_label.html('');
       progress_bar.css('width', "0");
-      $('i', pause_btn).removeClass('icon-light');
-      $('i', resume_btn).removeClass('icon-light');
+      $('i', pause_btn).removeClass('fa-light');
+      $('i', resume_btn).removeClass('fa-light');
     }
 
     function error(message){ 
@@ -149,7 +149,7 @@
         .append($('<button>', {type: 'button', class: 'close', 'data-dismiss': 'alert'}).html("&times;"))
         .append(message)
         .prependTo($input.parent());
-      $('.progress-info', $input.parent()).removeClass('progress-info').addClass('progress-danger');
+      $('.progress-bar-info', $input.parent()).removeClass('progress-bar-info').addClass('progress-bar-danger');
       progress_bar.css('width', "100%");
       progress_label.html(message);
     }

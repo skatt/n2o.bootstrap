@@ -1,0 +1,50 @@
+.file_upload {
+  position: relative;
+  border: 1px solid #eee;
+  display: block;
+
+  padding:5px;
+
+  & .progress {
+    resize: none;
+    height: 2em;
+    line-height:2em;
+    margin-bottom: 5px;
+
+    & .bar {
+      .transition(width .06s ease);
+    }
+    & .progress-label {
+      position:absolute;
+      left:0;
+      width:100%;
+      text-align:center;
+      color: white;
+    }
+
+    & .progress-ctl {
+      position: absolute;
+      text-align:center;
+      width:100%;
+      left:0;
+    }
+  }
+
+  & .ctl{
+    text-align: center;
+    padding-bottom: 0;
+    & .info{
+      margin: 0;
+      vertical-align:middle;
+      text-align:center;
+      height:2em;
+      display:inline-block;
+      margin-top:-3px;
+      word-break:break-all;
+    }
+  }
+
+  & .preview {
+    margin-bottom: 5px;
+  }
+}
