@@ -11,15 +11,15 @@ render_element(R= #htmlbox{}) ->
     Up =  #upload{id = wf:temp_id(),
         root = R#htmlbox.root,
         dir = R#htmlbox.dir,
-        delegate = htmlbox,
-        delegate_query = htmlbox,
+        delegate = element_htmledit,
+        delegate_query = element_htmledit,
         delegate_api = R#htmlbox.delegate_api,
         post_write = R#htmlbox.post_write,
         img_tool = R#htmlbox.img_tool,
         post_target = PreviewId,
         size = R#htmlbox.size},
 
-    UploadPostback = wf_event:new(Up, Id, htmlbox, control_event, <<"''">>),
+    UploadPostback = wf_event:new(Up, Id, element_htmledit, control_event, <<"''">>),
     PostbackFun = wf:temp_id(),
     wf:wire(wf:f("window['~s'] = function(){~s};", [PostbackFun, UploadPostback])),
 
