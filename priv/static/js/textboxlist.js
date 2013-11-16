@@ -89,15 +89,7 @@ $.Autocompleter = function(input, options) {
 
   // add spinner
 
-  // prevent form submit in opera when selecting with return key
-  $.browser.opera && $(input.form).bind("submit.autocomplete", function() {
-    if (blockSubmit) {
-      blockSubmit = false;
-      return false;
-    }
-  });
-
-  $input.bind('keyup change', function(event) {
+  $input.on('keyup change', function(event) {
     // a keypress means the input has focus
     // avoids issue where input had focus before the autocomplete was applied
     hasFocus = 1;
@@ -191,7 +183,7 @@ $.Autocompleter = function(input, options) {
   }).on("unautocomplete", function() {
     select.unbind();
     $input.unbind();
-    $(input.form).unbind(".autocomplete");
+    $(input.form).off(".autocomplete");
   }).on('autocompleteData', function(e, res, term){
       var data = options.parse && options.parse(res) || parse(res);
       receiveData(term, data);
@@ -604,11 +596,11 @@ $.Autocompleter.Select = function (options, input, select, config) {
   };
 
   function movePosition(step) {
-    if (options.scrollJumpPosition || (!options.scrollJumpPosition && !((step < 0 && active == 0) || (step > 0 && active == listItems.size() - 1)) )) {
+    if (options.scrollJumpPosition || (!options.scrollJumpPosition && !((step < 0 && active == 0) || (step > 0 && active == listItems.length - 1)) )) {
       active += step;
       if (active < 0) {
-        active = listItems.size() - 1;
-      } else if (active >= listItems.size()) {
+        active = listItems.length - 1;
+      } else if (active >= listItems.length) {
         active = 0;
       }
     }
@@ -656,8 +648,8 @@ $.Autocompleter.Select = function (options, input, select, config) {
       }
     },
     pageDown: function() {
-      if (active != listItems.size() - 1 && active + 8 > listItems.size()) {
-        moveSelect( listItems.size() - 1 - active );
+      if (active != listItems.length - 1 && active + 8 > listItems.length) {
+        moveSelect( listItems.length - 1 - active );
       } else {
         moveSelect(8);
       }
@@ -902,7 +894,7 @@ $.TextboxLister = function(elem, opts) {
     input.css({width: iw - (parseInt(input.css('margin-left'),10) + parseInt(input.css('margin-right'),10)) });
 
   });
-  self.input.bind("AddValue", function(e, val) {
+  self.input.on("AddValue", function(e, val) {
     if (val) {
       self.select(val);
     }
@@ -913,8 +905,8 @@ $.TextboxLister = function(elem, opts) {
       if(!self.cursor) $(self.input).focus();
     }
   });
-  self.input.bind("Reset", function(e) {self.reset();});
-  self.input.bind("Clear", function(e) {self.clear();});
+  self.input.on("Reset", function(e) {self.reset();});
+  self.input.on("Clear", function(e) {self.clear();});
 
   // init
   self.currentValues = [];
