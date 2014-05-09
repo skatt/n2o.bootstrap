@@ -1,6 +1,6 @@
 -module(element_textboxlist).
 -compile(export_all).
--include("wf.hrl").
+-include_lib("n2o_bootstrap/include/wf.hrl").
 
 reflect() -> record_info(fields, textboxlist).
 
