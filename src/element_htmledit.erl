@@ -1,7 +1,8 @@
 -module (element_htmledit).
 -author('doxtop@synrc.com').
 -compile(export_all).
--include_lib("n2o_bootstrap/include/wf.hrl").
+%-include_lib("n2o_bootstrap/include/wf.hrl").
+-include("wf.hrl").
 -include_lib("kernel/include/file.hrl").
 
 render_element(R= #htmlbox{}) ->

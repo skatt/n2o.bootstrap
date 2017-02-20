@@ -1,6 +1,7 @@
 -module (element_htmlbox).
 -author('doxtop@synrc.com').
--include_lib("wf.hrl").
+%-include_lib("n2o_bootstrap/include/wf.hrl").
+-include("wf.hrl").
 -include_lib("kernel/include/file.hrl").
 -compile(export_all).
 

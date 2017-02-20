@@ -1,6 +1,7 @@
 -module(element_slider).
 -compile(export_all).
--include_lib("n2o_bootstrap/include/wf.hrl").
+%-include_lib("n2o_bootstrap/include/wf.hrl").
+-include("wf.hrl").
 
 render_element(R = #slider{})->
   Id = if R#slider.id == undefined -> wf:temp_id(); true -> R#slider.id end,
