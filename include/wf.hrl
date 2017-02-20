@@ -1,7 +1,7 @@
 -ifndef(N2O_BOOTSTRAP_HRL).
 -define(N2O_BOOTSTRAP_HRL, true).
 
--include_lib("n2o/include/wf.hrl").
+-include_lib("nitro/include/wf.hrl").
 
 % emulate msg ! socket through wire
 -define(WS_SEND(Id,Ev,Detail), wf:wire(wf:f("document.getElementById('~s').dispatchEvent("
