@@ -20,7 +20,7 @@ render_element(R=#htmlbox{state=S})->
 event({Cid, wire_upload, #upload_state{}=S})->
   [{cmd, [{name, Name}, {tag, "wire_upload"}]} = Cmd] = wf:q({Cid, <<"detail">>}),
   Uid = wf:temp_id(),
-  U = #upload{id = Uid, state=S#upload_state{cid = Uid}},
+  U = #twbs_upload{id = Uid, state=S#upload_state{cid = Uid}},
   ?WS_SEND(Cid, exec, {cmd, [{name, wf:to_binary(Name)}, {arg, wf:to_binary(element_upload:render(U))}]}),
   element_upload:wire(U),
   wf:wire(#event{postback={Cid, complete, Uid}, target=Uid, type=upload_complete, delegate=?MODULE});
