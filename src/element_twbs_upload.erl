@@ -1,4 +1,4 @@
--module(element_upload).
+-module(element_twbs_upload).
 -behaviour(gen_server).
 -include_lib("wf.hrl").
 -include_lib("kernel/include/file.hrl").
@@ -47,24 +47,24 @@ terminate(R,S) ->
     E -> ?WS_SEND(S#upload_state.cid, error, [{msg, E}]), wf:flush(S#upload_state.room) end.
 code_change(_,S,_) -> {ok,S}.
 
-render_element(#upload{id=Id, state=S} = R) ->
+render_element(#twbs_upload{id=Id, state=S} = R) ->
   Uid = case Id of undefined -> wf:temp_id(); I -> I end,
   Ust = S#upload_state{cid=Uid},
-  Uel = R#upload{id=Uid, state=Ust},
+  Uel = R#twbs_upload{id=Uid, state=Ust},
   wire(Uel), render(Uel).
 
-render(#upload{id=Id} = R) ->
+render(#twbs_upload{id=Id} = R) ->
   wf_tags:emit_tag(<<"input">>, [], [
     {<<"id">>, Id},
     {<<"type">>, <<"file">>},
-    {<<"class">>, R#upload.class},
+    {<<"class">>, R#twbs_upload.class},
     {<<"style">>, <<"display:none">>},
-    {<<"name">>, R#upload.name} ]).
+    {<<"name">>, R#twbs_upload.name} ]).
 
-wire(#upload{id=Id, state=S, delegate=D}=R) ->
+wire(#twbs_upload{id=Id, state=S, delegate=D}=R) ->
   Callbacks = [{query_file, [Id], S},{start_upload, [], S}, {deliver, [], S}, {complete, [], ok}],
   wf:wire(wf:f("Upload('#~s',{preview:'~s',value:'~s', block_size:'~s'});",
-    [Id, wf:to_list(S#upload_state.preview), R#upload.value, wf:to_list(S#upload_state.block_size)])),
+    [Id, wf:to_list(S#upload_state.preview), R#twbs_upload.value, wf:to_list(S#upload_state.block_size)])),
 
   [wf:wire(#event{postback={Id,T,Arg}, source=Src, target=Id, type=T, delegate=D}) || {T, Src, Arg} <- Callbacks].
 

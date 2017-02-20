@@ -9,7 +9,7 @@ render_element(R= #htmlbox{}) ->
     Id = case R#htmlbox.id of undefined-> wf:temp_id(); I -> I end,
     PreviewId = case R#htmlbox.post_target of undefined -> "preview_"++Id; T-> T end, 
     Html = case R#htmlbox.html of undefined -> ""; H -> wf:js_escape(H) end,
-    Up =  #upload{id = wf:temp_id(),
+    Up =  #twbs_upload{id = wf:temp_id(),
         root = R#htmlbox.root,
         dir = R#htmlbox.dir,
         delegate = element_htmledit,
@@ -32,7 +32,7 @@ render_element(R= #htmlbox{}) ->
         {<<"data-upload-postback">>, PostbackFun},
         {<<"data-upload">>, wf:html_encode(wf:f("~s", [wf:render([Up,#p{body=["&nbsp;"]}])]))}]).
 
-control_event(_Cid, #upload{} = Tag) -> element_upload:wire(Tag);
+control_event(_Cid, #twbs_upload{} = Tag) -> element_upload:wire(Tag);
 control_event(Cid, {query_file, Root, Dir, File, MimeType, PostWrite, Target})->
   Name = binary_to_list(File),
   Size = case file:read_file_info(filename:join([Root,Dir,Name])) of 
