@@ -24,7 +24,7 @@
 % Synrc Elements
 -record(rtable, {?ELEMENT_BASE(element_rtable), rows=[]}).
 -record(upload_state, {cid, root=code:priv_dir(n2o), dir="", name, type, room=upload, data= <<>>, preview=false, size=[{200,200}], index=0, block_size=1048576}).
--record(twbs_upload, {?CTRL_BASE(element_upload), name, value, state=#upload_state{}, root, dir, delegate_query, delegate_api, post_write, img_tool, post_target, size, preview}).
+-record(twbs_upload, {?CTRL_BASE(element_upload), name, value, state=#upload_state{}, root, delegate_query, delegate_api, post_write, img_tool, post_target, size, preview}).
 -record(textboxlist, {?ELEMENT_BASE(element_textboxlist), placeholder="", unique=true, values=[], autocomplete=true, queryRemote=true, onlyFromValues=true, minLenght=1}).
 -record(htmlbox, {?CTRL_BASE(element_htmlbox), html, state=#upload_state{}, root, delegate_query, delegate_api, post_write, img_tool, post_target, size}).
 
